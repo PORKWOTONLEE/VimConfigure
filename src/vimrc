@@ -1,0 +1,68 @@
+" 显示相关
+set number              " 显示行号
+set hlsearch            " 搜索高亮
+set cursorline          " 光标所在行高亮
+syntax on               " 语法高亮
+
+" 格式相关
+set autoindent          " 自动跟随上一行缩进
+set shiftwidth=4        " 换行自动缩进空格数
+set tabstop=4           " tab键表示的缩进空格数 
+set softtabstop=4       " 删除空格时，一次删除的空格数 
+set expandtab           " tab键仅用作缩进，不表示键值 
+set encoding=utf-8      " 设置文件读取的编码格式
+set fileencoding=utf-8  " 设置文件保存的编码格式
+set fileformat=unix     " 设置文件保存时格式为unix
+
+" 按键配置
+" 普通模式按键映射
+nmap <C-K> <C-V>
+nmap <F6> <ESC> :NERDTreeToggle<CR> 
+nmap <F5> <ESC> :TlistToggle<CR>
+nmap ,f  :Leaderf file<CR>
+nmap ,F  :Leaderf function<CR>
+nmap ,fr :Leaderf rg<CR>
+nmap ,fm :Leaderf mru<CR>
+nmap ,ft :Leaderf tag<CR>
+nmap ftn :FloatermNew<CR>
+nmap ftt :FloatermToggle<CR>
+nmap ftk :FloatermKill<CR>
+nmap ftm :FloatermNew make<CR>
+" 鼠标可用
+set mouse=a
+
+" Vim-plug配置
+call plug#begin('~/.vim/plugged')
+Plug 'vim-scripts/taglist.vim'
+Plug 'preservim/nerdtree'
+Plug 'Yggdroot/LeaderF'
+Plug 'neoclide/coc.nvim',{'do': 'yarn install --frozen-lockfile'}
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'voldikss/vim-floaterm'
+call plug#end()
+
+" Taglist配置
+" let Tlist_Ctags_Cmd = '/usr/bin/ctags'         "设定系统中ctags程序的位置
+let Tlist_Show_One_File = 1                    "不同时显示多个文件的tag，只显示当前文件的
+let Tlist_Exit_OnlyWindow = 1                  "如果taglist窗口是最后一个窗口，则退出vim
+
+" LeaderF配置
+let g:Lf_ReverseOrder=1 " 搜索结果反向
+
+" NerdTree配置
+let g:NERDTreeWinPos="right" " NERDTree始终在窗口右侧打开
+
+" Coc.nvim配置
+" tab键触发补全
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+ 
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
