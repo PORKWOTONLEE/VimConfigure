@@ -129,7 +129,8 @@ sudo apt update > /dev/null 2>&1
 echo -e "：成功"
 echo -e "  │    ├──(3/4)[添加GitHub到SSH已知服务器]\c"
 ssh-keyscan www.github.com >> ${HOME}/.ssh/known_hosts > /dev/null 2>&1
-echo -e "  │    └──(4/4)[配置GitHub-SSHKEY]"
+echo -e "：成功"
+echo -e "  │    └──(4/4)[配置GitHub-SSHKEY]\c"
 if [ -f "${HOME}/.ssh/id_rsa.pub" ]
 then
     echo -e "已配置，如出现问题，请重新配置"
@@ -158,7 +159,6 @@ else
     echo -e "  │         └──(8/8)[是否完成以上操作Y/N]\c"
     SSHKEYConfirm
 fi
-echo -e "：成功"
 echo -e "  │ "
 
 # 配置vimrc
