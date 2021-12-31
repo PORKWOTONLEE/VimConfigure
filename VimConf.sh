@@ -127,7 +127,7 @@ CreatVimDir
 echo -e "  │    ├──(2/4)[更新仓库]\c"
 sudo apt update > /dev/null 2>&1
 echo -e "：成功"
-echo -e "  │    ├──(3/4)[添加GitHub已知服务器]\c"
+echo -e "  │    ├──(3/4)[添加GitHub到SSH已知服务器]\c"
 ssh-keyscan www.github.com >> ${HOME}/.ssh/known_hosts > /dev/null 2>&1
 echo -e "  │    └──(4/4)[配置GitHub-SSHKEY]"
 if [ -f "${HOME}/.ssh/id_rsa.pub" ]
