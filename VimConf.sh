@@ -103,14 +103,14 @@ function AutoInstallCtags()
             fi
         fi
     else
-        cd ${CACHE_DIR}# > /dev/null 2>&1
-        git clone git@github.com:universal-ctags/ctags.git# > /dev/null 2>&1
-        cd ctags# > /dev/null 2>&1
-        ./autogen.sh# > /dev/null 2>&1
-        ./configure# > /dev/null 2>&1
-        sudo make# > /dev/null 2>&1
-        sudo make install# > /dev/null 2>&1
-        if type ctags# > /dev/null 2>&1
+        cd ${CACHE_DIR} > /dev/null 2>&1
+        git clone git@github.com:universal-ctags/ctags.git > /dev/null 2>&1
+        cd ctags > /dev/null 2>&1
+        ./autogen.sh > /dev/null 2>&1
+        ./configure > /dev/null 2>&1
+        sudo make > /dev/null 2>&1
+        sudo make install > /dev/null 2>&1
+        if type ctags > /dev/null 2>&1
         then
             echo -e "：成功"
         else
@@ -127,14 +127,16 @@ CreatVimDir
 echo -e "  │    ├──(2/3)[更新仓库]\c"
 sudo apt update > /dev/null 2>&1
 echo -e "：成功"
-echo -e "  │    └──(3/3)[安装git]\c"
-AutoInstallMod git
+echo -e "  │    └──(3/3)[添加GitHub已知服务器]\c"
+ssh-keyscan www.github.com >> ${HOME}/.ssh/known_hosts > /dev/null 2>&1
+echo -e "：成功"
 echo -e "  │ "
 
 # 配置vimrc
 echo -e "  ├──(1/4)[配置vim插件环境]"
-
-echo -e "  │    ├──(1/2)[配置coc.nvim依赖]"
+echo -e "  │    ├──(1/3)[安装git]\c"
+AutoInstallMod git
+echo -e "  │    ├──(2/3)[配置coc.nvim依赖]"
 echo -e "  │    │    ├──(1/5)[安装clangd]\c"
 AutoInstallMod clangd 
 echo -e "  │    │    ├──(2/5)[安装ripgrep]\c"
@@ -145,7 +147,7 @@ echo -e "  │    │    ├──(4/5)[安装&升级n]\c"
 AutoInstallMod n
 echo -e "  │    │    └──(5/5)[安装yarn]\c"
 AutoInstallMod yarn
-echo -e "  │    └──(2/2)[配置Taglist依赖]"
+echo -e "  │    └──(3/3)[配置Taglist依赖]"
 echo -e "  │         ├──(1/4)[安装pkg-config]\c"
 AutoInstallMod pkg-config
 echo -e "  │         ├──(2/4)[安装autoconf]\c"
