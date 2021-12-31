@@ -122,13 +122,42 @@ function AutoInstallCtags()
 # 预处理
 echo -e "  │"
 echo -e "  ├──(0/4)[预处理]"
-echo -e "  │    ├──(1/3)[生成必要文件夹]\c"
+echo -e "  │    ├──(1/4)[生成必要文件夹]\c"
 CreatVimDir
-echo -e "  │    ├──(2/3)[更新仓库]\c"
+echo -e "  │    ├──(2/4)[更新仓库]\c"
 sudo apt update > /dev/null 2>&1
 echo -e "：成功"
-echo -e "  │    └──(3/3)[添加GitHub已知服务器]\c"
+echo -e "  │    ├──(3/4)[添加GitHub已知服务器]\c"
 ssh-keyscan www.github.com >> ${HOME}/.ssh/known_hosts > /dev/null 2>&1
+echo -e "  │    └──(4/4)[配置GitHub-SSHKEY]"
+if [ -f "${HOME}/.ssh/id_rsa.pub" ]
+then
+    echo -e "已配置，如出现问题，请重新配置"
+else
+    echo -e "\n  │         ├──(1/8)[请按下列步骤进行配置]"
+    echo -e "  │         ├──(2/8)[打开另一个终端]"
+    echo -e "  │         ├──(3/8)[输入sshkey-gen]"
+    echo -e "  │         ├──(4/8)[连续输入回车]"
+    echo -e "  │         ├──(5/8)[直到出现以下图样]"
+    echo -e "  │         │   The key fingerprint is:"
+    echo -e "  │         │   SHA256:*********************************"
+    echo -e "  │         │   The key's randomart image is:"
+    echo -e "  │         │   +---[RSA 3072]----+"
+    echo -e "  │         │   |         .     + |"
+    echo -e "  │         │   |         .*o=.Bo.|"
+    echo -e "  │         │   |         =o. =o..|"
+    echo -e "  │         │   |        o..  .o..|"
+    echo -e "  │         │   |        S+ + =oo |"
+    echo -e "  │         │   |        = = * =.o|"
+    echo -e "  │         │   |       o o + o o.|"
+    echo -e "  │         │   |      .oo        |"
+    echo -e "  │         │   |    .o+=o        |"
+    echo -e "  │         │   +----[SHA256]-----+"
+    echo -e "  │         ├──(6/8)[输入cat ~/.ssh/id_rsa.pub]"
+    echo -e "  │         ├──(7/8)[将出现的代码复制到GitHub，并确认]"
+    echo -e "  │         └──(8/8)[是否完成以上操作Y/N]\c"
+    SSHKEYConfirm
+fi
 echo -e "：成功"
 echo -e "  │ "
 
