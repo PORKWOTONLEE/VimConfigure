@@ -1,6 +1,6 @@
 # VimConfigure / Vim配置脚本
 
-可以快速的在WSL（Window Subsystem Linux / 微软Linux子系统）上配置好舒适的Vim环境
+可以在WSL（Window Subsystem Linux / 微软Linux子系统）上快速配置，符合我个人习惯的Vim环境
 
 ## 目前已安装的Vim插件包括：
 * 文件标签：taglist
